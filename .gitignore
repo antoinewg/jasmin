@@ -1,3 +1,4 @@
 *.development
 /venv
 /node_modules
+.vscode/
