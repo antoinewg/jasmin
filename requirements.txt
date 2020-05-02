@@ -1,5 +1,6 @@
 appdirs==1.4.3
 appnope==0.1.0
+asgiref==3.2.7
 attrs==19.3.0
 backcall==0.1.0
 black==19.10b0
@@ -7,6 +8,10 @@ certifi==2020.4.5.1
 chardet==3.0.4
 click==7.1.2
 decorator==4.4.2
+dj-database-url==0.5.0
+Django==3.0.5
+django-heroku==0.3.1
+gunicorn==20.0.4
 idna==2.9
 ipdb==0.13.2
 ipython==7.14.0
@@ -18,14 +23,18 @@ pathspec==0.8.0
 pexpect==4.8.0
 pickleshare==0.7.5
 prompt-toolkit==3.0.5
+psycopg2==2.8.5
 ptyprocess==0.6.0
 Pygments==2.6.1
+pytz==2020.1
 regex==2020.4.4
 requests==2.23.0
 six==1.14.0
+sqlparse==0.3.1
 toml==0.10.0
 traitlets==4.3.3
 typed-ast==1.4.1
 urllib3==1.25.9
 wcwidth==0.1.9
 websockets==8.1+poly.2020.1.16.gitb342ae864e
+whitenoise==5.0.1
