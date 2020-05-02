@@ -32,6 +32,31 @@ services:
       - KAFKA_ADVERTISED_HOST_NAME=localhost
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+      - "8090:8090"
+    env_file:
+      - "env.influxdb"
+    volumes:
+      - ./srv/docker/influxdb/data:/var/lib/influxdb
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    env_file:
+      - "env.grafana"
+    user: "0"
+    links:
+      - influxdb
+    volumes:
+      - ./srv/docker/grafana/data:/var/lib/grafana
+
 networks:
   docker-elk:
     driver: bridge
