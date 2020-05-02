@@ -3,3 +3,5 @@
 /node_modules
 .vscode/
 /srv
+.DS_Store
+db.sqlite3
