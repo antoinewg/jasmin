@@ -36,5 +36,5 @@ traitlets==4.3.3
 typed-ast==1.4.1
 urllib3==1.25.9
 wcwidth==0.1.9
-websockets==8.1+poly.2020.1.16.gitb342ae864e
+websockets==8.1
 whitenoise==5.0.1
