@@ -1,10 +1,53 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-
-<div class="jumbotron">
+<div class="jumbotron bg-light">
   <div class="container">
-    <h1>
-      Welcome to Jasmin.io
-    </h1>
+    <h3>Welcome to Jasmin</h3>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h3>Gaps</h3>
+
+          <br />
+
+          {% for gap in gaps %}
+          <h6>
+            <span class="badge badge-secondary">{{ gap.priority }}</span>
+          </h6>
+          {% empty %}
+          <p class="empty">No gaps to show.</p>
+          {% endfor %}
+
+          <button type="button" class="btn btn-primary btn-block">
+            Check for gaps
+          </button>
+        </div>
+      </div>
+
+      <!-- Useful for responsiveness to add space between cards -->
+      <br />
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h3>Alerts</h3>
+          <br />
+
+          {% for alert in alerts %}
+          <h6>
+            <span class="badge badge-secondary">{{ alert.priority }}</span>
+          </h6>
+          {% empty %}
+          <p class="empty">No alerts to show.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
