@@ -47,14 +47,17 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
+    user: "0"
     ports:
       - "3000:3000"
     env_file:
       - "env.grafana"
-    user: "0"
+    environment:
+      GF_PATHS_CONFIG: /etc/grafana/grafana.ini
     links:
       - influxdb
     volumes:
+      - ./config/grafana:/etc/grafana
       - ./srv/docker/grafana/data:/var/lib/grafana
 
 networks:
