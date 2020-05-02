@@ -1,0 +1,20 @@
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<div class="navbar d-flex flex-row-reverse">
+  <div class="dropdown align-self-right">
+    <button
+      class="btn dropdown-toggle text-light"
+      type="button"
+      data-toggle="dropdown"
+    >
+      Pages
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{% url 'index' %}">Home</a>
+      <a class="dropdown-item" href="{% url 'stocks' %}">Stocks</a>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,10 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <div class="container">
-  <h2>Page View Report</h2>
+  <h2>List of available stocks</h2>
 
   <ul>
-    {% for greeting in greetings %}
-    <li>{{ greeting.when }}</li>
+    {% for stock in stocks %}
+    <li>{{ stock.name }}</li>
     {% endfor %}
   </ul>
 </div>

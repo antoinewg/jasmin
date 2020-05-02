@@ -1,0 +1,107 @@
+/* Sticky Footer Classes */
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Other Classes for Page Styling */
+
+body {
+  background: #39a87b;
+  background: linear-gradient(to right, #39a87b, #8bc8aa);
+}
+
+/* Overwrite properties */
+.jumbotron {
+  border-radius: 0;
+}
+
+.all-page {
+  height: 90vh;
+}
+
+.btn-success {
+  background: #39a87b !important;
+}
+
+.bg-success {
+  background: #39a87b !important;
+}
+
+.text-success {
+  color: #39a87b !important;
+}
+
+/* Graph vis.html */
+#mynetwork {
+  height: 100%;
+  min-height: 500px;
+}
+
+#fullscreencontainer {
+  width: 100%;
+  height: 100%;
+  border: 1px solid lightgray;
+  z-index: 10;
+  background-color: white;
+  border-radius: 8px;
+}
+
+#fullscreenicon {
+  position: absolute;
+  padding-left: 12px;
+  padding-top: 12px;
+  color: #39a87b;
+  z-index: 10;
+}
+
+#escfullscreenicon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: white;
+  color: #39a87b;
+  z-index: 10;
+}
+
+/* Keylines styling */
+#fscreencontainer {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+#klchart {
+  height: 100%;
+  min-height: 500px;
+}
+
+#fscreenicon {
+  position: absolute;
+  right: 30px;
+  padding-top: 6px;
+  color: #39a87b;
+  z-index: 10;
+}
+
+#escfscreenicon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: white;
+  color: #39a87b;
+  z-index: 10;
+}

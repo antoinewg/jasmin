@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Greeting
+from equities.models import Stock
 
 
 def index(request):
@@ -9,7 +9,6 @@ def index(request):
     return render(request, "index.html")
 
 
-def db(request):
-    greetings = Greeting.objects.all()
-
-    return render(request, "db.html", {"greetings": greetings})
+def stocks(request):
+    stocks = Stock.objects.all()
+    return render(request, "stocks.html", locals())

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Python Getting Started on Heroku</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+
+    <!-- Load bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body class="d-flex flex-column">
+    <div id="page-content">
+      <!--  -->
+      {% include 'navbar.html' with pseudo=pseudo %}
+      <!--  -->
+      {% block content %} {% endblock content %}
+    </div>
+
+    <br />
+
+    {% include "footer.html" %}
+  </body>
+</html>

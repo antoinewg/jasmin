@@ -22,5 +22,5 @@ import equities.views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", equities.views.index, name="index"),
-    path("db/", equities.views.db, name="db"),
+    path("stocks/", equities.views.stocks, name="stocks"),
 ]
