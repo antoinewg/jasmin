@@ -50,17 +50,6 @@ def index(request):
             "summary": "U.S. electric carmaker Tesla Inc\nhas applied for a licence to supply electricity in the United\nKingdom, The Telegraph reported on Saturday.",
             "url": "https://www.reuters.com/article/us-tesla-licence/tesla-applies-to-become-uk-electricity-provider-the-telegraph-idUSKBN22E0SL",
         },
-        {
-            "category": "company news",
-            "datetime": 1588446372,
-            "headline": "UPDATE 1-Millicom backs out of $570 mln deal for Telefonica's Costa Rica unit",
-            "id": 4164242,
-            "image": "https://s3.reutersmedia.net/resources/r/?m=02\u0026d=20200502\u0026t=2\u0026i=1517267164\u0026w=1200\u0026r=LYNXMPEG410J5",
-            "related": "",
-            "source": "Reuters",
-            "summary": "Millicom International Cellular\nsaid on Saturday it would back out of a $570\nmillion deal to buy Telefonica's Costa Rican business,\ncreating a headache for the Spanish company as it looks to\nsharpen its focus on core markets in Europe and Brazil.",
-            "url": "https://www.reuters.com/article/us-millicom-telefonica-deal/millicom-backs-out-of-570-million-deal-for-telefonicas-costa-rica-unit-idUSKBN22E0NM",
-        },
     ]
     return render(request, "index.html", locals())
 
