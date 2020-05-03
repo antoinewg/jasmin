@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
     def get_candle(self, symbol, start, end):
         candles = endpoints.fetch_candles(symbol, start, end)
-        time.sleep(1)
+        time.sleep(0.5)
         return candles
 
     def handle(self, *args, **options):
@@ -60,25 +60,28 @@ class Command(BaseCommand):
 
         for exchange in exchanges:
             print(f"Looking into exchange {exchange['name']}.")
-            all_gaps = []
+            tot_gaps = 0
             symbols = self.get_symbols(exchange["code"])
             for symbol in symbols:
                 print("Checking gaps for %s\r" % symbol["symbol"], end="")
                 start, end = get_range()
                 candles = self.get_candle(symbol["symbol"], start, end)
-                all_gaps += utils.detect_gaps_fom_candles(symbol["symbol"], candles)
+                gaps = utils.detect_gaps_fom_candles(symbol["symbol"], candles)
+                if len(gaps):
+                    print(f"Creating {len(gaps)} gaps for symbol {symbol["description"]} ({symbol["symbol"]})")
+                    tot_gaps += len(gaps)
+                    for gap in gaps:
+                        models.Gap.objects.create(
+                            symbol=gap.s,
+                            close=gap.c,
+                            next_open=gap.no,
+                            percent=gap.p,
+                            next_volume=gap.nv,
+                            timestamp=date.fromtimestamp(gap.t).isoformat(),
+                            next_timestamp=date.fromtimestamp(gap.nt).isoformat(),
+                        )
 
             print(f"Found {len(all_gaps)} gaps for exchange {exchange['name']}.")
-            for gap in all_gaps:
-                models.Gap.objects.create(
-                    symbol=gap.s,
-                    close=gap.c,
-                    next_open=gap.no,
-                    percent=gap.p,
-                    next_volume=gap.nv,
-                    timestamp=date.fromtimestamp(gap.t).isoformat(),
-                    next_timestamp=date.fromtimestamp(gap.nt).isoformat(),
-                )
 
         gaps_db = models.Gap.objects.count()
         print(f"🎉 Finished. Total: {gaps_db} gaps found")

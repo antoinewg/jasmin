@@ -27,12 +27,12 @@ class Company(models.Model):
 class Gap(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid.uuid4)
     symbol = models.CharField(max_length=100)  # "AAPL"
-    close = models.IntegerField()
-    next_open = models.IntegerField()
-    percent = models.IntegerField()
-    next_volume = models.IntegerField()
+    close = models.FloatField()
+    next_open = models.FloatField()
+    percent = models.FloatField()
+    volume_above_average = models.FloatField()
+    next_volume = models.FloatField()
     timestamp = models.DateField()
-    next_timestamp = models.DateField()
     filled = models.BooleanField(default=False)
 
 
