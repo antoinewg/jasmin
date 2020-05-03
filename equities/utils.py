@@ -4,7 +4,7 @@ Gap = namedtuple("Gap", "s c no p nv t va")
 
 
 def get_volume_above_average(vols, i, nv):
-    vs = vols[max(0, i - 30) : i + 30][:30]
+    vs = vols[max(0, i - 5) : i + 5][:5]
     return int(100 * 100 * (len(vs) * nv - sum(vs)) / sum(vs)) / 100.0
 
 

@@ -88,35 +88,4 @@
     </div>
   </div>
 </div>
-
-<br />
-
-<div class="container">
-  <div class="card bg-light">
-    <div class="card-body">
-      <h3>Gaps</h3>
-
-      <br />
-
-      {% for gap in gaps %}
-      <a href="https://finance.yahoo.com/quote/{{gap.symbol}}/">
-        <h3>{{ gap.symbol}}</h3>
-      </a>
-      <h6>
-        {{ gap.timestamp}} ・
-        <!--  -->
-        <b>Close:</b> {{ gap.close}} ・
-        <!--  -->
-        <b>Open:</b> {{ gap.next_open}}
-        <!--  -->
-        (<b>{{ gap.percent}}%</b>) ・
-        <!--  -->
-        <b>Volume:</b> {{ gap.next_volume}}
-      </h6>
-      {% empty %}
-      <p class="empty">No gaps to show.</p>
-      {% endfor %}
-    </div>
-  </div>
-</div>
 {% endblock %}
