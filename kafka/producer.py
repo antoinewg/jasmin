@@ -2,7 +2,8 @@ import asyncio
 from time import sleep
 from json import dumps
 from kafka import KafkaProducer
-import websockets
+
+# import websockets => to install
 
 WS_URI = "wss://api.tiingo.com/crypto"
 
@@ -20,15 +21,16 @@ subscribe = {
 
 
 async def receive_msg():
-    async with websockets.connect(WS_URI) as websocket:
-        await websocket.send(dumps(subscribe))
-        print("subscribed :)")
+    pass
+    # async with websockets.connect(WS_URI) as websocket:
+    #     await websocket.send(dumps(subscribe))
+    #     print("subscribed :)")
 
-        while True:
-            msg = await websocket.recv()
-            print("received msg:", msg)
-            producer.send("tiingo", value=msg)
-            sleep(1)
+    #     while True:
+    #         msg = await websocket.recv()
+    #         print("received msg:", msg)
+    #         producer.send("tiingo", value=msg)
+    #         sleep(1)
 
 
 asyncio.get_event_loop().run_until_complete(receive_msg())

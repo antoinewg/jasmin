@@ -12,6 +12,7 @@ dj-database-url==0.5.0
 Django==3.0.5
 django-heroku==0.3.1
 django-static-fontawesome==5.12.1.4
+docutils==0.16
 gunicorn==20.0.4
 idna==2.9
 ipdb==0.13.2
@@ -37,5 +38,4 @@ traitlets==4.3.3
 typed-ast==1.4.1
 urllib3==1.25.9
 wcwidth==0.1.9
-websockets==8.1
 whitenoise==5.0.1
