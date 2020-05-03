@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 class Exchange(models.Model):
@@ -24,8 +25,15 @@ class Company(models.Model):
 
 
 class Gap(models.Model):
-    name = models.CharField(max_length=100)
-    company = models.ForeignKey(Company, on_delete=models.PROTECT, related_name="gaps")
+    uid = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    symbol = models.CharField(max_length=100)  # "AAPL"
+    close = models.IntegerField()
+    next_open = models.IntegerField()
+    percent = models.IntegerField()
+    next_volume = models.IntegerField()
+    timestamp = models.DateField()
+    next_timestamp = models.DateField()
+    filled = models.BooleanField(default=False)
 
 
 class Alert(models.Model):
