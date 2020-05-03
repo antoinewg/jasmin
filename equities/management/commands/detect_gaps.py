@@ -32,45 +32,53 @@ class Command(BaseCommand):
 
     def get_exchanges(self):
         # exchanges = endpoints.fetch_exchanges()
-        exchanges = [{"code": "US", "currency": "USD", "name": "US exchanges"}]
+        exchanges = [
+            {"code": "US", "currency": "USD", "name": "US exchanges"},
+            {"code": "L", "currency": "GBP", "name": "LONDON STOCK EXCHANGE"},
+            {"code": "PA", "currency": "EUR", "name": "NYSE EURONEXT - EURONEXT PARIS"},
+        ]
+        time.sleep(1)
         print(f"🚀 Found {len(exchanges)} exchanges")
         return exchanges
 
     def get_symbols(self, exchange):
         symbols = endpoints.fetch_symbols(exchange)
+        time.sleep(1)
         # symbols = [s for s in symbols if s["symbol"] in IMPORTANT_SYMBOLS]
-        print(f"🚀 Found {len(symbols)} symbols")
+        print(f"🚀 Found {len(symbols)} symbols for exchange {exchange}")
         return sorted(symbols, key=lambda x: x["symbol"])
 
     def get_candle(self, symbol, start, end):
         candles = endpoints.fetch_candles(symbol, start, end)
+        time.sleep(1)
         return candles
 
     def handle(self, *args, **options):
-        all_gaps = []
+        models.Gap.objects.all().delete()
+
         exchanges = self.get_exchanges()
 
         for exchange in exchanges:
             print(f"Looking into exchange {exchange['name']}.")
-
+            all_gaps = []
             symbols = self.get_symbols(exchange["code"])
             for symbol in symbols:
                 print("Checking gaps for %s\r" % symbol["symbol"], end="")
                 start, end = get_range()
                 candles = self.get_candle(symbol["symbol"], start, end)
                 all_gaps += utils.detect_gaps_fom_candles(symbol["symbol"], candles)
-                time.sleep(1)
 
-        for gap in all_gaps:
-            models.Gap.objects.create(
-                symbol=gap.s,
-                close=gap.c,
-                next_open=gap.no,
-                percent=gap.p,
-                next_volume=gap.nv,
-                timestamp=date.fromtimestamp(gap.t).isoformat(),
-                next_timestamp=date.fromtimestamp(gap.nt).isoformat(),
-            )
+            print(f"Found {len(all_gaps)} gaps for exchange {exchange['name']}.")
+            for gap in all_gaps:
+                models.Gap.objects.create(
+                    symbol=gap.s,
+                    close=gap.c,
+                    next_open=gap.no,
+                    percent=gap.p,
+                    next_volume=gap.nv,
+                    timestamp=date.fromtimestamp(gap.t).isoformat(),
+                    next_timestamp=date.fromtimestamp(gap.nt).isoformat(),
+                )
 
         gaps_db = models.Gap.objects.count()
-        print(f"🎉 Finished. {gaps_db} gaps found")
+        print(f"🎉 Finished. Total: {gaps_db} gaps found")

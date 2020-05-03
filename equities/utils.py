@@ -5,7 +5,7 @@ Gap = namedtuple("Gap", "s c no p nv t nt")
 
 def detect_gaps_fom_candles(symbol, candles):
     gaps = []
-    for i, c in enumerate(candles["c"][:-1]):
+    for i, c in enumerate(candles.get("c", [])[:-1]):
         no = candles["o"][i + 1]
         nh = candles["h"][i + 1]
         nl = candles["l"][i + 1]
