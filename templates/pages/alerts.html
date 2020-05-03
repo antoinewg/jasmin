@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container">
+  <div class="card bg-light">
+    <div class="card-body">
+      <h3>Alerts</h3>
+      <br />
+
+      {% for alert in alerts %}
+      <h6>
+        <span class="badge badge-secondary">{{ alert.priority }}</span>
+      </h6>
+      {% empty %}
+      <p class="empty">No alerts to show.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Useful for responsiveness to add space between cards -->
+  <br />
+</div>
+{% endblock %}

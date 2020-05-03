@@ -1,40 +1,28 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-<div class="jumbotron bg-light">
-  <div class="container">
-    <h3>Welcome to Jasmin</h3>
-  </div>
-</div>
-
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <div class="card bg-light">
         <div class="card-body">
-          <h3>Gaps</h3>
+          <a href="{% url 'gaps' %}"><h3>Gaps</h3></a>
 
           <br />
 
           {% for gap in gaps %}
           <h6>
-            <span class="badge badge-secondary">{{ gap.priority }}</span>
+            <span class="badge badge-secondary">{{ gap.name }}</span>
           </h6>
           {% empty %}
           <p class="empty">No gaps to show.</p>
           {% endfor %}
-
-          <button type="button" class="btn btn-primary btn-block">
-            Check for gaps
-          </button>
         </div>
       </div>
-    </div>
+      <!-- Useful for responsiveness to add space between cards -->
+      <br />
 
-    <!-- Useful for responsiveness to add space between cards -->
-    <br />
-    <div class="col-sm-4">
       <div class="card bg-light">
         <div class="card-body">
-          <h3>Alerts</h3>
+          <a href="{% url 'alerts' %}"><h3>Alerts</h3></a>
           <br />
 
           {% for alert in alerts %}
@@ -51,10 +39,10 @@
       <br />
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <div class="card bg-light">
         <div class="card-body">
-          <h3>News</h3>
+          <a href="{% url 'news' %}"><h3>News</h3></a>
           <br />
           {% for news in newslist %}
           <!-- Label -->

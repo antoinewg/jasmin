@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container">
+  <div class="card bg-light">
+    <div class="card-body">
+      <h3>Gaps</h3>
+
+      <br />
+
+      {% for gap in gaps %}
+      <h6>
+        <span class="badge badge-secondary">{{ gap.name }}</span>
+      </h6>
+      {% empty %}
+      <p class="empty">No gaps to show.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

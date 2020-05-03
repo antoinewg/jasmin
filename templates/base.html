@@ -10,6 +10,7 @@
       type="text/css"
       href="{% static 'fontawesome/css/all.min.css' %}"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Load bootstrap -->
     <link
       rel="stylesheet"
@@ -22,7 +23,7 @@
   <body class="d-flex flex-column">
     <div id="page-content">
       <!--  -->
-      {% include 'navbar.html' with pseudo=pseudo %}
+      {% include 'navbar.html' %}
       <!--  -->
       {% block content %} {% endblock content %}
     </div>

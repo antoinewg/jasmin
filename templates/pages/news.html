@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container">
+  <div class="card bg-light">
+    <div class="card-body">
+      <h3>News</h3>
+      <br />
+      {% for news in newslist %}
+      <!-- Label -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4">
+            <img
+              src="{{ news.image }}"
+              class="rounded float-left"
+              alt="{{ news.category }}"
+            />
+          </div>
+          <div class="col-sm-8">
+            <p class="h4">{{ news.headline }}</p>
+            <a href="{{ news.url }}"
+              ><p class="h6">
+                <small>{{ news.url|truncatechars:80 }}</small>
+              </p></a
+            >
+            <p class="h6">{{ news.summary }}</p>
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <!-- {
+                "category": "company news",
+                "datetime": 1588435081,
+                "headline": "Where is the coronavirus in N.J.? Latest map, update on county-by-county cases. (May 2, 2020)",
+                "id": 4168652,
+                "image": "https://www.nj.com/resizer/7JZ2LNbE5bdOwKq399tIocV57jY=/1280x0/smart/arc-anglerfish-arc2-prod-advancelocal.s3.amazonaws.com/public/JNRQFSTBDJBATJC4JQPFOVIYVU.JPG",
+                "related": ",AUB,ESS,ESSX,MSEX,WFD,WFGPY,",
+                "source": "NJ",
+                "summary": "At least 7,538 have died of COVID-19 related causes in New Jersey.",
+                "url": "https://www.nj.com/coronavirus/2020/05/where-is-the-coronavirus-in-nj-latest-map-update-on-county-by-county-cases-may-2-2020.html",
+            }, -->
+      {% empty %}
+      <p class="empty">No news to show.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
