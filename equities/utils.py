@@ -1,6 +1,11 @@
 from collections import namedtuple
 
-Gap = namedtuple("Gap", "s c no p nv t nt")
+Gap = namedtuple("Gap", "s c no p nv t va")
+
+
+def get_volume_above_average(vols, i, nv):
+    vs = vols[max(0, i - 30) : i + 30][:30]
+    return int(100 * 100 * (len(vs) * nv - sum(vs)) / sum(vs)) / 100.0
 
 
 def detect_gaps_fom_candles(symbol, candles):
@@ -19,9 +24,9 @@ def detect_gaps_fom_candles(symbol, candles):
         if c > no:
             nv = candles["v"][i + 1]  # next_volume
             t = candles["t"][i]  # timestamp
-            nt = candles["t"][i + 1]  # next_timestamp
-            p = 100 * (c - no) / no  # percent
-            gap = Gap(symbol, c, no, p, nv, t, nt)
+            p = int(100 * 100 * (c - no) / no) / 100.0  # percent
+            va = get_volume_above_average(candles["v"], i, nv)
+            gap = Gap(symbol, c, no, p, nv, t, va)
             if p > 10:  # fall above 10%
                 gaps.append(gap)
 

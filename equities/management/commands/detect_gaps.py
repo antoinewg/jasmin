@@ -22,8 +22,8 @@ IMPORTANT_SYMBOLS = set(
 def get_range():
     ts = time.time()
     day = 60 * 60 * 24
-    end = int(day * ts // day)
-    start = int(end - 365 * day)
+    end = int(day * (1 + ts // day))
+    start = int(end - 2 * 365 * day)
     return start, end
 
 
@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
     def get_candle(self, symbol, start, end):
         candles = endpoints.fetch_candles(symbol, start, end)
-        time.sleep(0.5)
+        time.sleep(0.75)
         return candles
 
     def handle(self, *args, **options):
@@ -68,7 +68,9 @@ class Command(BaseCommand):
                 candles = self.get_candle(symbol["symbol"], start, end)
                 gaps = utils.detect_gaps_fom_candles(symbol["symbol"], candles)
                 if len(gaps):
-                    print(f"Creating {len(gaps)} gaps for symbol {symbol["description"]} ({symbol["symbol"]})")
+                    print(
+                        f"Creating {len(gaps)} gaps for symbol {symbol['description']} ({symbol['symbol']})"
+                    )
                     tot_gaps += len(gaps)
                     for gap in gaps:
                         models.Gap.objects.create(
@@ -77,8 +79,8 @@ class Command(BaseCommand):
                             next_open=gap.no,
                             percent=gap.p,
                             next_volume=gap.nv,
+                            volume_above_average=gap.va,
                             timestamp=date.fromtimestamp(gap.t).isoformat(),
-                            next_timestamp=date.fromtimestamp(gap.nt).isoformat(),
                         )
 
             print(f"Found {len(all_gaps)} gaps for exchange {exchange['name']}.")

@@ -61,18 +61,26 @@
             <th class="th-sm">Open</th>
             <th class="th-sm">Percent</th>
             <th class="th-sm">Volume</th>
+            <th class="th-sm">VAA (%)</th>
             <th class="th-sm">Date</th>
+            <th class="th-sm">timestamp</th>
           </tr>
         </thead>
         <tbody>
           {% for gap in gaps %}
           <tr>
-            <td>{{ gap.symbol }}</td>
+            <td>
+              <a href="https://finance.yahoo.com/quote/{{gap.symbol}}/">
+                {{ gap.symbol}}
+              </a>
+            </td>
             <td>{{ gap.close }}</td>
             <td>{{ gap.next_open }}</td>
             <td>{{ gap.percent }}</td>
             <td>{{ gap.next_volume }}</td>
+            <td>{{ gap.volume_above_average }}</td>
             <td>{{ gap.timestamp }}</td>
+            <td>{{ gap.timestamp|date:"U" }}</td>
           </tr>
           {% endfor %}
         </tbody>
