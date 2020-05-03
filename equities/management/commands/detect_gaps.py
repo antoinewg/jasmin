@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
     def get_symbols(self, exchange):
         symbols = endpoints.fetch_symbols(exchange)
-        symbols = [s for s in symbols if s["symbol"] in IMPORTANT_SYMBOLS]
+        # symbols = [s for s in symbols if s["symbol"] in IMPORTANT_SYMBOLS]
         print(f"🚀 Found {len(symbols)} symbols")
         return sorted(symbols, key=lambda x: x["symbol"])
 

@@ -6,7 +6,7 @@ from equities.api import endpoints
 
 
 def gaps(request):
-    gaps = models.Gap.objects.all()
+    gaps = models.Gap.objects.all().order_by("-percent")
     return render(request, "pages/gaps.html", locals())
 
 
