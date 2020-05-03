@@ -74,13 +74,14 @@ class Command(BaseCommand):
                     tot_gaps += len(gaps)
                     for gap in gaps:
                         models.Gap.objects.create(
-                            symbol=gap.s,
-                            close=gap.c,
-                            next_open=gap.no,
-                            percent=gap.p,
-                            next_volume=gap.nv,
-                            volume_above_average=gap.va,
-                            timestamp=date.fromtimestamp(gap.t).isoformat(),
+                            symbol=gap.symbol,
+                            ascending=gap.ascending,
+                            prev_close=gap.prev_close,
+                            open=gap.open,
+                            percent=gap.percent,
+                            volume=gap.volume,
+                            volume_above_average=gap.vol_above_avg,
+                            timestamp=date.fromtimestamp(gap.time).isoformat(),
                         )
 
             print(f"Found {len(all_gaps)} gaps for exchange {exchange['name']}.")

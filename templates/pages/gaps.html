@@ -57,13 +57,14 @@
         <thead>
           <tr>
             <th class="th-sm">Stock</th>
-            <th class="th-sm">Close</th>
-            <th class="th-sm">Open</th>
+            <th class="th-sm">Close (J-1)</th>
+            <th class="th-sm">Open (J)</th>
             <th class="th-sm">Percent</th>
             <th class="th-sm">Volume</th>
             <th class="th-sm">VAA</th>
             <th class="th-sm">Date</th>
-            <th class="th-sm">timestamp</th>
+            <th class="th-sm">Timestamp</th>
+            <th class="th-sm">Ascending</th>
           </tr>
         </thead>
         <tbody>
@@ -74,13 +75,14 @@
                 {{ gap.symbol}}
               </a>
             </td>
-            <td>{{ gap.close }}</td>
-            <td>{{ gap.next_open }}</td>
+            <td>{{ gap.prev_close }}</td>
+            <td>{{ gap.open }}</td>
             <td>{{ gap.percent }}</td>
-            <td>{{ gap.next_volume }}</td>
+            <td>{{ gap.volume }}</td>
             <td>{{ gap.volume_above_average }}</td>
             <td>{{ gap.timestamp }}</td>
             <td>{{ gap.timestamp|date:"U" }}</td>
+            <td>{{ gap.ascending }}</td>
           </tr>
           {% endfor %}
         </tbody>
