@@ -10,6 +10,7 @@ click==7.1.2
 decorator==4.4.2
 dj-database-url==0.5.0
 Django==3.0.5
+django-environ==0.4.5
 django-heroku==0.3.1
 django-static-fontawesome==5.12.1.4
 docutils==0.16
