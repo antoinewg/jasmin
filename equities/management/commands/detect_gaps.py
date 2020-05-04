@@ -46,7 +46,7 @@ class Command(BaseCommand):
         time.sleep(1)
         # symbols = [s for s in symbols if s["symbol"] in IMPORTANT_SYMBOLS]
         print(f"🚀 Found {len(symbols)} symbols for exchange {exchange}")
-        return sorted(symbols, key=lambda x: x["symbol"])
+        return sorted(symbols, key=lambda x: x["symbol"])[::-1]
 
     def get_candle(self, symbol, start, end):
         candles = endpoints.fetch_candles(symbol, start, end)
@@ -54,7 +54,7 @@ class Command(BaseCommand):
         return candles
 
     def handle(self, *args, **options):
-        models.Gap.objects.all().delete()
+        # models.Gap.objects.all().delete()
 
         exchanges = self.get_exchanges()
 
