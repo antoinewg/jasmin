@@ -4,12 +4,26 @@
     rel="stylesheet"
     href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
   />
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script>
-    // Material Design example
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+      var min = parseInt($("#minPercent").val(), 10);
+      var max = parseInt($("#maxPercent").val(), 10);
+      var percent = parseFloat(data[3]) || 0; // use data for the percent column
+
+      if (
+        (isNaN(min) && isNaN(max)) ||
+        (isNaN(min) && percent <= max) ||
+        (min <= percent && isNaN(max)) ||
+        (min <= percent && percent <= max)
+      ) {
+        return true;
+      }
+      return false;
+    });
+
     $(document).ready(function () {
-      $("#dtMaterialDesignExample").DataTable();
+      var table = $("#dtMaterialDesignExample").DataTable();
       $("#dtMaterialDesignExample_wrapper")
         .find("label")
         .each(function () {
@@ -23,20 +37,14 @@
           $this.attr("placeholder", "Search");
           $this.removeClass("form-control-sm");
         });
-      $("#dtMaterialDesignExample_wrapper .dataTables_length").addClass(
-        "d-flex flex-row"
-      );
-      $("#dtMaterialDesignExample_wrapper .dataTables_filter").addClass(
-        "md-form"
-      );
-      $("#dtMaterialDesignExample_wrapper select").removeClass(
-        "custom-select custom-select-sm form-control form-control-sm"
-      );
-      $("#dtMaterialDesignExample_wrapper select").addClass("mdb-select");
-      $("#dtMaterialDesignExample_wrapper .mdb-select").materialSelect();
       $("#dtMaterialDesignExample_wrapper .dataTables_filter")
         .find("label")
         .remove();
+
+      // Event listener to the two range filtering inputs to redraw on input
+      $("#minPercent, #maxPercent").keyup(function () {
+        table.draw();
+      });
     });
   </script>
 </head>
@@ -45,6 +53,21 @@
   <div class="card bg-light">
     <div class="card-body">
       <h3>Gaps</h3>
+
+      <br />
+
+      <table cellspacing="5" cellpadding="5">
+        <tbody>
+          <tr>
+            <td>Min %:</td>
+            <td><input type="text" id="minPercent" name="min" /></td>
+          </tr>
+          <tr>
+            <td>Max %:</td>
+            <td><input type="text" id="maxPercent" name="max" /></td>
+          </tr>
+        </tbody>
+      </table>
 
       <br />
 

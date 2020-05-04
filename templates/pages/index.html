@@ -9,10 +9,22 @@
           <br />
 
           {% for gap in gaps %}
+          <h5>
+            <a href="https://finance.yahoo.com/quote/{{gap.symbol}}/">
+              {{ gap.symbol}}
+            </a>
+          </h5>
           <h6>
-            <span class="badge badge-secondary">{{ gap.name }}</span>
+            Close (J-1) {{ gap.prev_close }} ・
+            <!--  -->
+            Open (J) {{ gap.open }}
+            <!--  -->
           </h6>
-          {% empty %}
+          <h6>
+            Percent {{ gap.percent }} ・
+            <!--  -->
+            Vol. above avg. {{ gap.volume_above_average }}% {% empty %}
+          </h6>
           <p class="empty">No gaps to show.</p>
           {% endfor %}
         </div>
