@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
     def get_candle(self, symbol, start, end):
         candles = endpoints.fetch_candles(symbol, start, end)
-        time.sleep(0.75)
+        time.sleep(1)
         return candles
 
     def handle(self, *args, **options):
