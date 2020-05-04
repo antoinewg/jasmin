@@ -33,8 +33,8 @@ class Command(BaseCommand):
     def get_exchanges(self):
         # exchanges = endpoints.fetch_exchanges()
         exchanges = [
-            {"code": "US", "currency": "USD", "name": "US exchanges"},
-            {"code": "L", "currency": "GBP", "name": "LONDON STOCK EXCHANGE"},
+            # {"code": "US", "currency": "USD", "name": "US exchanges"},
+            # {"code": "L", "currency": "GBP", "name": "LONDON STOCK EXCHANGE"},
             {"code": "PA", "currency": "EUR", "name": "NYSE EURONEXT - EURONEXT PARIS"},
         ]
         time.sleep(1)
