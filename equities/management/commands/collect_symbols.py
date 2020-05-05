@@ -53,6 +53,6 @@ class Command(BaseCommand):
             unique_symbols |= set(self.get_peers(symbol))
 
         with open(f"{path}/symbols.json", "w") as outfile:
-            json.dump(list(unique_symbols), outfile)
+            json.dump(sorted(list(unique_symbols)), outfile)
 
         print(f"✅ Finished. {len(unique_symbols)} unique symbols.")
