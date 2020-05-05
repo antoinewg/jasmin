@@ -52,7 +52,10 @@ class Command(BaseCommand):
         for symbol in most_volatile:
             unique_symbols |= set(self.get_peers(symbol))
 
+        # Filter symbols from other exchanges
+        # filters the one finishing in .PA or without .
+        filtered = [sy for sy in unique_symbols if "." not in sy or sy[-3:] == ".PA"]
         with open(f"{path}/symbols.json", "w") as outfile:
-            json.dump(sorted(list(unique_symbols)), outfile)
+            json.dump(sorted(filtered), outfile)
 
-        print(f"✅ Finished. {len(unique_symbols)} unique symbols.")
+        print(f"✅ Finished. {len(filtered)} unique symbols.")

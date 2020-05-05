@@ -5,12 +5,11 @@ Gap = namedtuple(
 )
 
 
-def get_volume_above_average(volumes, day, volume):
-    previous_volumes = volumes[max(0, day - 5) : day + 5][:5]
-    total = sum(previous_volumes)
-    if total:
-        return int(100 * (len(previous_volumes) * volume - total) / total) / 100.0
-    return 0
+def get_volume_above_average(prev_volumes, volume):
+    total = sum(prev_volumes)
+    return (
+        int(100 * (len(prev_volumes) * volume - total) / total) / 100.0 if total else 0
+    )
 
 
 def detect_gaps_fom_candles(symbol, candles):
@@ -63,12 +62,15 @@ def detect_gaps_fom_candles(symbol, candles):
 
             if gap_present:
                 percent = int(100 * 100 * diff) / 100.0
-                if percent < 10 or volume < 1000:
+                if percent < 10:
                     continue
 
-                vol_above_avg = get_volume_above_average(
-                    candles.get("v", []), day, volume
-                )
+                volumes = candles.get("v", [])
+                prev_volumes = volumes[day - 5 : day + 5][:5]
+                if sum(prev_volumes) / 5 < 1000:
+                    continue
+
+                vol_above_avg = get_volume_above_average(prev_volumes, volume)
                 if vol_above_avg < 2:
                     continue
 
