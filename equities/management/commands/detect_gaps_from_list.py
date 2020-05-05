@@ -28,7 +28,7 @@ class Command(BaseCommand):
             symbols = json.loads(symbols_file.read())
             print(f"Received list of {len(symbols)} symbols to analyse.")
 
-        return sorted(symbols)
+        return sorted(symbols)[::-1]
 
     def get_candle(self, symbol, start, end):
         candles = endpoints.fetch_candles(symbol, start, end)
