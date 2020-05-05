@@ -63,9 +63,15 @@ def detect_gaps_fom_candles(symbol, candles):
 
             if gap_present:
                 percent = int(100 * 100 * diff) / 100.0
+                if percent < 10 or volume < 1000:
+                    continue
+
                 vol_above_avg = get_volume_above_average(
                     candles.get("v", []), day, volume
                 )
+                if vol_above_avg < 2:
+                    continue
+
                 gap = Gap(
                     symbol,
                     ascending,
@@ -76,8 +82,7 @@ def detect_gaps_fom_candles(symbol, candles):
                     volume,
                     vol_above_avg,
                 )
-                if percent > 10:
-                    gaps.append(gap)
+                gaps.append(gap)
 
             # At the end of the loop, save the previous OHLC
             prev_open, prev_close = open, close
