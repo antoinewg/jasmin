@@ -8,6 +8,7 @@ URLS = {
     "exchange": "/stock/exchange?",
     "symbols": "/stock/symbol?exchange={}&",
     "candle": "/stock/candle?symbol={}&resolution=D&from={}&to={}&",
+    "peers": "/stock/peers?symbol={}&",
 }
 
 
@@ -36,3 +37,7 @@ def fetch_candles(symbol="AAPL", start=1572651390, end=1572910590):
     url = URLS["candle"].format(symbol, start, end)
     r = requests.get(url)
     return r.json()
+
+
+def fetch_peers(symbol="AAPL"):
+    return requests.get(URLS["peers"].format(symbol)).json()
