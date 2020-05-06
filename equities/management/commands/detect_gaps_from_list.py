@@ -21,14 +21,17 @@ def get_range():
 class Command(BaseCommand):
     help = "Check all the symbols OHLC data for gaps from the list of symbols provided."
 
-    def get_symbols(self):
+    def add_arguments(self, parser):
+        parser.add_argument("--from", default="A", dest="from", type=str)
+
+    def get_symbols(self, from_symbol):
         path = settings.BASE_DIR + "/equities/management/commands"
 
         with open(f"{path}/symbols.json") as symbols_file:
             symbols = json.loads(symbols_file.read())
             print(f"Received list of {len(symbols)} symbols to analyse.")
 
-        return sorted(symbols)[::-1]
+        return sorted([el for el in symbols if el > from_symbol])
 
     def get_candle(self, symbol, start, end):
         candles = endpoints.fetch_candles(symbol, start, end)
@@ -36,10 +39,8 @@ class Command(BaseCommand):
         return candles
 
     def handle(self, *args, **options):
-        models.Gap.objects.all().delete()
-
         tot_gaps = 0
-        for symbol in self.get_symbols():
+        for symbol in self.get_symbols(options["from"]):
             print("Checking gaps for %s\r" % symbol, end="")
             start, end = get_range()
             candles = self.get_candle(symbol, start, end)
@@ -59,7 +60,4 @@ class Command(BaseCommand):
                         timestamp=date.fromtimestamp(gap.time).isoformat(),
                     )
 
-        print(f"Found {len(all_gaps)} gaps for exchange {exchange['name']}.")
-
-        gaps_db = models.Gap.objects.count()
-        print(f"🎉 Finished. Total: {gaps_db} gaps found")
+        print(f"🎉 Finished. Total: {tot_gaps} gaps found")
