@@ -63,16 +63,16 @@ def detect_gaps_fom_candles(symbol, candles):
             if gap_present:
                 percent = int(100 * 100 * diff) / 100.0
                 if percent < 10:
-                    continue
+                    break
 
                 volumes = candles.get("v", [])
                 prev_volumes = volumes[day - 5 : day + 5][:5]
                 if sum(prev_volumes) / 5 < 1000:
-                    continue
+                    break
 
                 vol_above_avg = get_volume_above_average(prev_volumes, volume)
                 if vol_above_avg < 2:
-                    continue
+                    break
 
                 gap = Gap(
                     symbol,
