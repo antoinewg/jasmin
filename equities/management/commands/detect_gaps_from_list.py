@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 print(f"Creating {len(gaps)} gaps for symbol ({symbol})")
                 tot_gaps += len(gaps)
                 for gap in gaps:
-                    models.Gap.objects.create(
+                    models.Gap.objects.get_or_create(
                         symbol=gap.symbol,
                         ascending=gap.ascending,
                         prev_close=gap.prev_close,
