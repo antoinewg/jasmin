@@ -22,7 +22,7 @@ class Command(BaseCommand):
     help = "Check all the symbols OHLC data for gaps from the list of symbols provided."
 
     def add_arguments(self, parser):
-        parser.add_argument("--from", default="A", dest="from", type=str)
+        parser.add_argument("--from", default="", dest="from", type=str)
 
     def get_symbols(self, from_symbol):
         path = settings.BASE_DIR + "/equities/management/commands"
